@@ -17,8 +17,7 @@ jobs:
 
       - name: Check existence of versioned symlink
         run: |
-          file $(brew --prefix llvm)/lib/libLLVM-12.dylib
-          grealpath $(brew --prefix llvm)/lib/libLLVM-12.dylib
+          file $(brew --cellar)/llvm/12.0.0/lib/libLLVM-12.dylib
 
       - name: Check llvm-config output
         run: |
