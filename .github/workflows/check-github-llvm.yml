@@ -1,0 +1,26 @@
+name: Check GitHub LLVM
+on: workflow_dispatch
+jobs:
+  check-llvm:
+    strategy:
+      matrix:
+        os: [macos-11.0, macOS-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install LLVM and coreutils
+        run: brew install llvm coreutils
+
+      - name: Check existence of versioned symlink
+        run: |
+          file $(brew --prefix llvm)/lib/libLLVM-12.dylib
+          grealpath $(brew --prefix llvm)/lib/libLLVM-12.dylib
+
+      - name: Check llvm-config output
+        run: |
+          $(brew --prefix llvm)/bin/llvm-config --libfiles
+          $(brew --prefix llvm)/bin/llvm-config --libs
