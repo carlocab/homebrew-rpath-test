@@ -26,6 +26,14 @@ class MariadbAT1059 < Formula
     depends_on "linux-pam"
   end
 
+  # Fix syntax error with CMake 3.20
+  # https://github.com/mariadb-corporation/mariadb-connector-c/commit/242cab8cbcd91af882233730a83627d3b12ced83
+  patch do
+    url "https://github.com/mariadb-corporation/mariadb-connector-c/commit/242cab8cbcd91af882233730a83627d3b12ced83.patch?full_index=1"
+    sha256 "760fd19cd8d4d756a0799ed9110cfd2898237e43835fefe3668079c5b87fc36d"
+    directory "libmariadb"
+  end
+
   def install
     # Set basedir and ldata so that mysql_install_db can find the server
     # without needing an explicit path to be set. This can still
