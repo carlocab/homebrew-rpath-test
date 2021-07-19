@@ -132,6 +132,7 @@ class LlvmBootstrapProfdata < Formula
                       "-DCMAKE_CXX_COMPILER=#{bootstrap.bin}/clang++",
                       "-DLLVM_BUILD_INSTRUMENTED=IR",
                       "-DLLVM_BUILD_RUNTIME=NO",
+                      "-DLLVM_PROFILE_DATA_DIR=#{pkgshare}/profiles",
                       "-DCMAKE_C_FLAGS=#{instrumented_cflags.join(" ")}",
                       "-DCMAKE_CXX_FLAGS=#{instrumented_cxxflags.join(" ")}",
                       *args, *std_cmake_args
@@ -147,11 +148,10 @@ class LlvmBootstrapProfdata < Formula
     end
 
     # Finally, merge the generated profile data
-    pkgshare.mkpath
     system bootstrap.bin/"llvm-profdata",
            "merge",
            "-output=#{pkgshare}/pgo_profile.prof",
-           *Dir[llvmpath/"stage2/profiles/*.profraw"]
+           *Dir[pkgshare/"profiles/*.profraw"]
   end
 
   test do
