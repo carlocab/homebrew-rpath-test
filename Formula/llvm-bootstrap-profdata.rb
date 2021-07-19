@@ -13,6 +13,11 @@ class LlvmBootstrapProfdata < Formula
     regex(/LLVM (\d+\.\d+\.\d+)/i)
   end
 
+  bottle do
+    root_url "https://github.com/carlocab/homebrew-rpath-test/releases/download/llvm-bootstrap-profdata-12.0.1"
+    sha256 cellar: :any_skip_relocation, big_sur: "bc439a38b6ba822025036e2306a688b817d1fb36a335fc5581e2dfff619f7fba"
+  end
+
   # Clang cannot find system headers if Xcode CLT is not installed
   pour_bottle? only_if: :clt_installed
 
