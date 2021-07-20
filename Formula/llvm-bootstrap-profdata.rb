@@ -15,7 +15,8 @@ class LlvmBootstrapProfdata < Formula
 
   bottle do
     root_url "https://github.com/carlocab/homebrew-rpath-test/releases/download/llvm-bootstrap-profdata-12.0.1"
-    sha256 cellar: :any_skip_relocation, big_sur: "bc439a38b6ba822025036e2306a688b817d1fb36a335fc5581e2dfff619f7fba"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, big_sur: "e9a156cbaaf0630c05933657c44c790ddea6ebaffacbe4b0d7b5a7f78c5be342"
   end
 
   # Clang cannot find system headers if Xcode CLT is not installed
